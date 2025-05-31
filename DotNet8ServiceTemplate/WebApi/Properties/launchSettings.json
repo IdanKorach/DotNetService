@@ -9,7 +9,7 @@
     }
   },
   "profiles": {
-    "DotNet8ServiceTemplate": {
+    "BusinessListManagementService": {
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": true,
