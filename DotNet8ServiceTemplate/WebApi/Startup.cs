@@ -14,8 +14,8 @@ public static class Startup
 
     private static void SetDiRegistration(IServiceCollection services)
     {
+        services.AddSingleton<IGenerateRandomNumbersService, GenerateRandomNumbersService>();
         services.AddSingleton<IExampleService, ExampleService>();
         services.AddSingleton<IDbManager, DbManager>();
     }
 }
-
