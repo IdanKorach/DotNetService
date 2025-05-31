@@ -10,7 +10,14 @@ public class ExampleController(ILogger<ExampleController> _logger, IExampleServi
     [HttpGet("RunExample")]
     public async Task<ActionResult> RunExample()
     {
-        var res = await _exampleService.RunExample();
+        var res = await _exampleService.GetRunExample();
+        return Ok(res);
+    }
+    
+    [HttpGet("RandomNumbers")]
+    public async Task<ActionResult> RandomNumbers(int amountToGenerate, int min, int max)
+    {
+        var res = await _exampleService.GetRandomNumbers(amountToGenerate,  min, max);
         return Ok(res);
     }
 }
