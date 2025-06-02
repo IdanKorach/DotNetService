@@ -5,7 +5,7 @@ namespace WebApi.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class GenerateRandomNumbersController(ILogger<GenerateRandomNumbersController> _logger, IGenerateRandomNumbersService generateRandomNumbersService) : ControllerBase
+public class GenerateRandomNumbersController(ILogger<GenerateRandomNumbersController> logger, IGenerateRandomNumbersService generateRandomNumbersService) : ControllerBase
 {
     [HttpGet("RandomNumbers")]
     public async Task<ActionResult> RandomNumbers(int amountToGenerate, int min, int max)

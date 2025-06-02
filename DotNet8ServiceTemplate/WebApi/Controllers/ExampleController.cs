@@ -5,7 +5,7 @@ namespace WebApi.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class ExampleController(ILogger<ExampleController> _logger, IExampleService exampleService) : ControllerBase
+public class ExampleController(ILogger<ExampleController> logger, IExampleService exampleService) : ControllerBase
 {
     [HttpGet("RunExample")]
     public async Task<ActionResult> RunExample()
