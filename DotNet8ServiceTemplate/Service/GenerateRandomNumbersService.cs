@@ -1,7 +1,7 @@
 using Model.DB;
 
 namespace Service;
-public class GenerateRandomNumbersService(IDbManager _dbClient) : IGenerateRandomNumbersService
+public class GenerateRandomNumbersService(IDbManager _dbClient) : IGenerateNumbersService
 {
     public Task<IEnumerable<int>> GetRandomNumbers(int amountToGenerate, int min, int max)
     {
