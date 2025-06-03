@@ -1,5 +1,7 @@
-﻿using Service;
+﻿using Microsoft.Extensions.Options;
+using Service;
 using Model.DB;
+using Service.Configuration;
 
 public static class Startup
 {
@@ -10,6 +12,12 @@ public static class Startup
         services.AddSwaggerGen();
         services.AddSingleton(configuration);
         SetDiRegistration(services);
+        services.Configure<FeatureFlags>(configuration.GetSection("FeatureFlags"));
+        services.AddSingleton<FeatureFlags>(serviceProvider =>
+        {
+            var options = serviceProvider.GetRequiredService<IOptions<FeatureFlags>>();
+            return options.Value;
+        });
     }
 
     private static void SetDiRegistration(IServiceCollection services)
