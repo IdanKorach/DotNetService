@@ -21,9 +21,11 @@ public class GenerateRandomNumbersService(IDbManager dbClient, FeatureFlags feat
             numbers.Add(random.Next(min, max));
         }
 
-        if (!featureFlags.EnableNewLogging) return Task.FromResult<IEnumerable<int>>(numbers);
-        logger.LogInformation("Successfully generated {Count} random numbers", numbers.Count);
-        logger.LogDebug("Generated numbers: {Numbers}", string.Join(", ", numbers));
+        if (featureFlags.EnableNewLogging)
+        {
+            logger.LogInformation("Successfully generated {Count} random numbers", numbers.Count);
+            logger.LogDebug("Generated numbers: {Numbers}", string.Join(", ", numbers));
+        }
 
         return Task.FromResult<IEnumerable<int>>(numbers);
     }

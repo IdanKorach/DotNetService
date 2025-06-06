@@ -12,12 +12,8 @@ public static class Startup
         services.AddSwaggerGen();
         services.AddSingleton(configuration);
         SetDiRegistration(services);
-        services.Configure<FeatureFlags>(configuration.GetSection("FeatureFlags"));
-        services.AddSingleton<FeatureFlags>(serviceProvider =>
-        {
-            var options = serviceProvider.GetRequiredService<IOptions<FeatureFlags>>();
-            return options.Value;
-        });
+        var featureFlags = configuration.GetSection("FeatureFlags").Get<FeatureFlags>();
+        services.AddSingleton(featureFlags);
     }
 
     private static void SetDiRegistration(IServiceCollection services)
