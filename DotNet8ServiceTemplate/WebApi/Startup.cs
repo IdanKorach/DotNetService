@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Options;
+﻿using Contracts;
+using FluentValidation;
 using Service;
 using Model.DB;
 using Service.Configuration;
@@ -11,6 +12,7 @@ public static class Startup
         services.AddEndpointsApiExplorer();
         services.AddSwaggerGen();
         services.AddSingleton(configuration);
+        services.AddValidatorsFromAssemblyContaining<GenerateNumbersRequest>();
         SetDiRegistration(services);
         var featureFlags = configuration.GetSection("FeatureFlags").Get<FeatureFlags>();
         services.AddSingleton(featureFlags);
