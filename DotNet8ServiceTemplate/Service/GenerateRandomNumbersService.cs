@@ -35,17 +35,17 @@ public class GenerateRandomNumbersService(
         return Task.FromResult<IEnumerable<int>>(numbers);
     }
 
-    public async Task<GenerateNumbersResponse> GenerateRandomNumbersAsync(GenerateNumbersRequest request)
+    public async Task<GenerateNumbersResponse> GenerateRandomNumbersAsync(GenerateNumbersRequest generateRequest)
     {
         try
         {
             if (featureFlags.EnableNewLogging)
             {
                 logger.LogInformation("Processing GenerateNumbersRequest with Amount: {Amount}, Min: {Min}, Max: {Max}", 
-                    request.AmountToGenerate, request.Min, request.Max);
+                    generateRequest.AmountToGenerate, generateRequest.Min, generateRequest.Max);
             }
 
-            var numbers = await GetRandomNumbers(request.AmountToGenerate, request.Min, request.Max);
+            var numbers = await GetRandomNumbers(generateRequest.AmountToGenerate, generateRequest.Min, generateRequest.Max);
             var numbersList = numbers.ToList();
 
             if (featureFlags.EnableNewLogging)

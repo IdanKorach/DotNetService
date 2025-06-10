@@ -1,4 +1,5 @@
 ﻿using Contracts;
+using Contracts.Validators;
 using FluentValidation;
 using Service;
 using Model.DB;

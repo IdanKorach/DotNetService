@@ -9,7 +9,8 @@ namespace WebApi.Controllers;
 [Route("[controller]")]
 public class GenerateRandomNumbersController(
     ILogger<GenerateRandomNumbersController> logger,
-    IGenerateNumbersService generateNumbersService) : ControllerBase
+    IGenerateNumbersService generateNumbersService,
+    IValidator<GenerateNumbersRequest> validator) : ControllerBase
 {
     [HttpGet("RandomNumbers")]
     public async Task<ActionResult> RandomNumbers(int amountToGenerate, int min, int max)
@@ -20,10 +21,9 @@ public class GenerateRandomNumbersController(
 
     [HttpPost("generate")]
     public async Task<IActionResult> GenerateNumbers(
-        [FromBody] GenerateNumbersRequest request,
-        IValidator<GenerateNumbersRequest> validator) 
+        [FromBody] GenerateNumbersRequest generateRequest) 
     {
-        var validationResult = await validator.ValidateAsync(request);
+        var validationResult = await validator.ValidateAsync(generateRequest);
 
         if (!validationResult.IsValid)
         {
@@ -42,7 +42,7 @@ public class GenerateRandomNumbersController(
             }));
         }
 
-        var response = await generateNumbersService.GenerateRandomNumbersAsync(request);
+        var response = await generateNumbersService.GenerateRandomNumbersAsync(generateRequest);
         return Ok(response);
     }
 }
